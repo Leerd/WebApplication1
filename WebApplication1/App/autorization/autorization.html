@@ -1,0 +1,20 @@
+﻿<form class="example-form midlle form-marg-top">
+    <mat-card class="example-card">
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Логин" [(ngModel)]="authData.login" name="login">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width marg-top">
+                <input matInput placeholder="Пароль" [(ngModel)]="authData.passpord" name="passpord">
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <div class="btn-middle">
+                <button class="btn btn-default btn-width marg-r" (click)="auth()">Войти</button>
+                <button class="btn btn-default btn-width" (click)="registration()">Регистрация</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>

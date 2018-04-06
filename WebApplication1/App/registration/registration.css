@@ -1,0 +1,69 @@
+﻿.midlle {
+    margin: 0 auto;
+}
+
+.marg-top {
+    margin-top: 10px;
+}
+
+.marg-r {
+    margin-right: 40px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.btn-width {
+    width: 115px;
+}
+
+.registration-card {
+    margin-bottom: 10px;
+}
+
+.btn-middle {
+    text-align: center;
+}
+
+.form-marg-top {
+    margin-top: 6%
+}
+
+.vizible-password .eye {
+    width: 21px;
+    position: absolute;
+    margin-left: 94%;
+    top: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.page-name {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.ng-pristine label {
+    color: rgba(0,0,0,.54) !important;
+}
+
+.mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}
+
+    .mat-step-icon, .mat-horizontal-stepper-header .mat-step-icon-not-touched {
+        height: 36px !important;
+        width: 36px !important;
+    }
+
+.mat-step-label {
+    font-size: 17px;
+    font-weight: 500;
+}

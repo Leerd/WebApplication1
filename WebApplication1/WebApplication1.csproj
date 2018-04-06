@@ -28,7 +28,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,14 +49,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.1\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.1\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.1\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,9 +137,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -153,22 +169,65 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="App\app.ts" />
+    <TypeScriptCompile Include="App\autorization\autorization.ts" />
+    <TypeScriptCompile Include="App\models\dto\base\base-request.ts" />
+    <TypeScriptCompile Include="App\models\dto\base\base-auth-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\base\base-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\requests\get-user-data-request.ts" />
+    <TypeScriptCompile Include="App\models\dto\requests\registration-request.ts" />
+    <TypeScriptCompile Include="App\models\dto\responses\auth-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\responses\get-user-data-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\responses\registration-response.ts" />
+    <TypeScriptCompile Include="App\models\interface\auth.ts" />
+    <TypeScriptCompile Include="App\models\dto\requests\auth-request.ts" />
+    <TypeScriptCompile Include="App\models\interface\enum\html-element-type-enum.ts" />
+    <TypeScriptCompile Include="App\models\interface\registration-data.ts" />
+    <TypeScriptCompile Include="App\registration\registration.ts" />
+    <TypeScriptCompile Include="App\services\auth-guard.service.ts" />
+    <TypeScriptCompile Include="App\services\auth.services.ts" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\GlobalExceptionHandler.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Healpers\DBHelper.cs" />
+    <Compile Include="Healpers\GenerateHelper.cs" />
+    <Compile Include="Healpers\TokenHelper.cs" />
+    <Compile Include="Models\Base\BaseRequest.cs" />
+    <Compile Include="Models\Base\BaseAuthResponse.cs" />
+    <Compile Include="Models\Base\BaseResponse.cs" />
+    <Compile Include="Models\DataBase\User.cs" />
+    <Compile Include="Models\DataBase\Verification.cs" />
+    <Compile Include="Models\Requests\AuthRequest.cs" />
+    <Compile Include="Models\Requests\GetUserDataRequest.cs" />
+    <Compile Include="Models\Requests\RegistrationRequest.cs" />
+    <Compile Include="Models\Responses\AuthResponse.cs" />
+    <Compile Include="Models\Responses\RegistrationResponse.cs" />
+    <Compile Include="Models\UserData.cs" />
+    <Compile Include="Operations\LoginIn.cs" />
+    <Compile Include="Operations\Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\index.html" />
+    <Content Include="App\app.html" />
+    <Content Include="App\autorization\autorization.css" />
+    <Content Include="App\autorization\autorization.html" />
+    <Content Include="App\registration\registration.css" />
+    <Content Include="App\registration\registration.html" />
     <Content Include="App\start\start.css" />
     <Content Include="App\start\start.html" />
+    <Content Include="App\styles.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\view.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -202,14 +261,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -227,7 +283,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\app.module.ts" />
     <TypeScriptCompile Include="App\main.ts" />
+    <TypeScriptCompile Include="App\services\paths.service.ts" />
+    <TypeScriptCompile Include="App\services\transort.service.ts" />
+    <TypeScriptCompile Include="App\services\user.service.ts" />
     <TypeScriptCompile Include="App\start\start.ts" />
+    <TypeScriptCompile Include="App\validators\validators.ts" />
     <TypeScriptCompile Include="App\vendors.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -252,7 +312,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59107</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59107/</IISUrl>
+          <IISUrl>http://localhost:6700/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

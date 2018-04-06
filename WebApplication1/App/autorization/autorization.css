@@ -1,0 +1,33 @@
+﻿.midlle {
+    margin: 0 auto;
+}
+
+.marg-top {
+    margin-top: 20px;
+}
+
+.marg-r {
+    margin-right: 40px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.btn-width {
+    width: 115px;
+}
+
+.btn-middle {
+    text-align: center;
+}
+
+.form-marg-top {
+    margin-top: 10%
+}

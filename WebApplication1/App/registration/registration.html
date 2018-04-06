@@ -1,0 +1,108 @@
+﻿<mat-horizontal-stepper linear #stepper="matHorizontalStepper">
+    <ng-template matStepperIcon="edit">
+        <mat-icon>check</mat-icon>
+    </ng-template>
+    <mat-step [stepControl]="registretionForm">
+        <!--Step-1-->
+        <ng-template matStepLabel>Введите данные</ng-template> <!--Step Name-->
+        <form class="example-form midlle form-marg-top" [formGroup]="registretionForm">
+            <h2 class="page-name">Регистрация</h2>
+            <mat-card class="registration-card">
+                <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Логин" [(ngModel)]="registrationData.login" name="login" formControlName="login">
+                    </mat-form-field>
+
+                    <div *ngIf="registretionForm.controls['login'].touched && registretionForm.controls['login'].value == '' ">
+                        Введите логин
+                    </div>
+
+                    <mat-form-field class="example-full-width marg-top">
+                        <input matInput placeholder="Имя" [(ngModel)]="registrationData.name" name="name" formControlName="name">
+                    </mat-form-field>
+
+                    <div *ngIf="registretionForm.controls['name'].touched && registretionForm.controls['name'].value == '' ">
+                        Введите ваше имя
+                    </div>
+
+                    <mat-form-field class="example-full-width marg-top">
+                        <input matInput placeholder="Фамилия" [(ngModel)]="registrationData.surName" name="surName" formControlName="surName">
+                    </mat-form-field>
+
+                    <div *ngIf="registretionForm.controls['surName'].touched && registretionForm.controls['surName'].value == '' ">
+                        Введите вашу фамилию
+                    </div>
+
+                    <mat-form-field class="example-full-width marg-top">
+                        <input matInput placeholder="E-mail" [(ngModel)]="registrationData.email" name="email" #email formControlName="email">
+                    </mat-form-field>
+
+                    <div *ngIf="registretionForm.controls['email'].value == '' ">
+                        Введите E-mail
+                    </div>
+
+                    <div *ngIf="registretionForm.controls['email'].invalid && registretionForm.controls['email'].touched && registretionForm.controls['email'].value != ''">
+                        E-mail введен не верно
+                    </div>
+
+                    <mat-form-field class="example-full-width marg-top vizible-password">
+                        <mat-icon class="eye" (click)="displayPassword(password)">remove_red_eye</mat-icon>
+                        <input matInput class="password-inp" type="password" placeholder="Пароль" [(ngModel)]="registrationData.passpord" name="password" formControlName="passwordFirst" #password>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width marg-top vizible-password">
+                        <mat-icon class="eye" (click)="displayPassword(passpordConfirm)">remove_red_eye</mat-icon>
+                        <input matInput class="password-inp" type="password" placeholder="Подтвердите пароль" [(ngModel)]="passwordConfirm" name="C" formControlName="passwordConfirm" #passpordConfirm>
+                    </mat-form-field>
+
+                    <div *ngIf="registretionForm.controls['passwordConfirm'].invalid && registretionForm.controls['passwordConfirm'].dirty && registretionForm.controls['passwordConfirm'].value != '' && registretionForm.controls['passwordFirst'].touched">
+                        Пароли не совпадают
+                    </div>
+
+                    <mat-form-field class="example-full-width marg-top">
+                        <input matInput placeholder="Номер Телефона" [(ngModel)]="registrationData.phone" name="phone" formControlName="phone">
+                    </mat-form-field>
+                </mat-card-content>
+
+                <div *ngIf="registretionForm.controls['phone'].touched && registretionForm.controls['phone'].value == '' ">
+                    Введите телефон
+                </div>
+
+                <mat-card-actions>
+                    <div class="btn-middle">
+                        <button class="btn btn-default btn-width" [disabled]="registretionForm.invalid" (click)="registration()">Регистрация</button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+
+    </mat-step> <!--Step-1 End-->
+    <mat-step>
+        <!--Step-2-->
+        <form>
+            <ng-template matStepLabel>Подтверждение</ng-template>
+            <mat-card class="example-card">
+                <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Код подтверждения">
+                    </mat-form-field>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <div class="btn-middle">
+                        <button class="btn btn-default btn-width">Подтвердить</button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </mat-step> <!--Step-2 End-->
+    <mat-step>
+        <!--Step-3-->
+        <ng-template matStepLabel>Завершение регистрации</ng-template>
+        You are now done.
+        <div>
+            <button mat-button>Back</button>
+            <button mat-button>Reset</button>
+        </div>
+    </mat-step><!--Step-3 End-->
+</mat-horizontal-stepper>

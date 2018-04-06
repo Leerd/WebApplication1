@@ -1,0 +1,1 @@
+{"version":3,"file":"base-auth-response.js","sourceRoot":"","sources":["base-auth-response.ts"],"names":[],"mappings":";;AAAA;IAAA;IAWA,CAAC;IARG,sBAAI,6CAAe;aAAnB;YACI,MAAM,CAAC,IAAI,CAAC,gBAAgB,CAAC;QACjC,CAAC;aAED,UAAoB,SAAkB;YAClC,QAAQ,CAAC;YACT,IAAI,CAAC,gBAAgB,GAAG,SAAS,CAAC;QACtC,CAAC;;;OALA;IAML,uBAAC;AAAD,CAAC,AAXD,IAWC;AAXY,4CAAgB"}

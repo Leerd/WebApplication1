@@ -22,6 +22,10 @@ module.exports = {
                 loader: 'ts-loader'
             },
             {
+                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+                loader: 'file-loader?name=Content/img/[name].[ext]'
+            },
+            {
                 test: /\.html$/,
                 exclude: /node_modules/,
                 loader: 'html-loader'
@@ -42,12 +46,5 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.css', '.html', '.sass', '.ts']
     },
-    target: 'web',
-    plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'App', 'index.html'),
-            filename: path.join(__dirname, 'dist', 'index.html')
-        }),
-    ],
+    target: 'web'
 }

@@ -10,15 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var user_service_1 = require("../services/user.service");
+var get_user_data_1 = require("../models/dto/requests/get-user-data");
+require("./start.css");
 var Start = /** @class */ (function () {
-    function Start() {
+    function Start(userService) {
+        this.userService = userService;
     }
+    Start.prototype.test = function () {
+        debugger;
+        var self = this;
+        var e = new get_user_data_1.GetUserDataRequest();
+        self.userService.getUserData(new get_user_data_1.GetUserDataRequest()).then(function (resp) {
+            resp.isSuccessVerify;
+            debugger;
+        });
+    };
     Start = __decorate([
         core_1.Component({
             selector: 'start',
-            template: require('./start.html')
+            template: require('./start.html'),
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [user_service_1.UserService])
     ], Start);
     return Start;
 }());
