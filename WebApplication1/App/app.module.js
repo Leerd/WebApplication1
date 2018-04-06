@@ -23,6 +23,10 @@ var app_1 = require("./app");
 var start_1 = require("./start/start");
 var autorization_1 = require("./autorization/autorization");
 var registration_1 = require("./registration/registration");
+var loader_service_1 = require("./custom-loader/loader.service");
+var http_service_factory_1 = require("./custom-loader/http-service.factory");
+var custom_http_service_1 = require("./custom-loader/custom-http.service");
+var core_module_1 = require("./custom-loader/core.module");
 var appRoutes = [
     { path: 'autorization', component: autorization_1.Autorization },
     { path: 'registration', component: registration_1.Registration },
@@ -51,13 +55,26 @@ var AppModule = /** @class */ (function () {
                 material_1.MatCheckboxModule,
                 material_1.MatStepperModule,
                 icon_1.MatIconModule,
+                material_1.MatProgressBarModule,
                 animations_1.BrowserAnimationsModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 forms_1.ReactiveFormsModule,
+                core_module_1.CoreModule,
                 router_1.RouterModule.forRoot(appRoutes, { useHash: true })],
             declarations: [app_1.App, start_1.Start, autorization_1.Autorization, registration_1.Registration],
-            providers: [transort_service_1.TransportService, auth_services_1.AuthService, auth_guard_service_1.AuthGuard, paths_service_1.PathsService, user_service_1.UserService, icon_1.MatIconRegistry],
+            providers: [transort_service_1.TransportService,
+                auth_services_1.AuthService,
+                auth_guard_service_1.AuthGuard,
+                paths_service_1.PathsService,
+                user_service_1.UserService,
+                icon_1.MatIconRegistry,
+                loader_service_1.LoaderService,
+                {
+                    provide: custom_http_service_1.CustomHttpService,
+                    useFactory: http_service_factory_1.httpServiceFactory,
+                    deps: [http_1.XHRBackend, http_1.RequestOptions, loader_service_1.LoaderService]
+                }],
             bootstrap: [app_1.App]
         })
     ], AppModule);

@@ -14,10 +14,12 @@ var http_1 = require("@angular/http");
 var paths_service_1 = require("./paths.service");
 require("rxjs/add/operator/toPromise");
 require("rxjs/add/operator/map");
+var custom_http_service_1 = require("../custom-loader/custom-http.service");
 var TransportService = /** @class */ (function () {
-    function TransportService(http, pathsService) {
+    function TransportService(http, pathsService, customHttpService) {
         this.http = http;
         this.pathsService = pathsService;
+        this.customHttpService = customHttpService;
     }
     TransportService.prototype.postData = function (url, request) {
         var self = this;
@@ -25,7 +27,7 @@ var TransportService = /** @class */ (function () {
         headers.append('Content-Type', 'application/json');
         if ((localStorage.getItem('token')))
             headers.append('X-Auth-Token', (localStorage.getItem('token')));
-        return self.http.post(url, JSON.stringify(request), { headers: headers })
+        return self.customHttpService.post(url, JSON.stringify(request), { headers: headers })
             .map(function (res) { return (res.json()); })
             .toPromise()
             .catch(function (error) { return self.errorHandler(error.json()); });
@@ -44,7 +46,7 @@ var TransportService = /** @class */ (function () {
     };
     TransportService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http, paths_service_1.PathsService])
+        __metadata("design:paramtypes", [http_1.Http, paths_service_1.PathsService, custom_http_service_1.CustomHttpService])
     ], TransportService);
     return TransportService;
 }());

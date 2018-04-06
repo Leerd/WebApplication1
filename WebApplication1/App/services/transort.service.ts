@@ -5,11 +5,12 @@ import { PathsService } from './paths.service';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map'
+import { CustomHttpService } from '../custom-loader/custom-http.service';
 
 @Injectable()
 
 export class TransportService {
-    constructor(private http: Http, private pathsService: PathsService) { }
+    constructor(private http: Http, private pathsService: PathsService, private customHttpService: CustomHttpService) { }
 
     public postData(url: string, request): Promise<any> {
         const self = this;
@@ -20,7 +21,7 @@ export class TransportService {
         if ((localStorage.getItem('token')))
             headers.append('X-Auth-Token', (localStorage.getItem('token')));
 
-        return self.http.post(url, JSON.stringify(request), { headers: headers })
+        return self.customHttpService.post(url, JSON.stringify(request), { headers: headers })
             .map((res: Response) => (res.json()))
             .toPromise()
             .catch((error: Response) => self.errorHandler(error.json()))

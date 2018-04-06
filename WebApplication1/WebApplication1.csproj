@@ -171,6 +171,12 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\app.ts" />
     <TypeScriptCompile Include="App\autorization\autorization.ts" />
+    <TypeScriptCompile Include="App\custom-loader\angular-redux-request.options.ts" />
+    <TypeScriptCompile Include="App\custom-loader\core.module.ts" />
+    <TypeScriptCompile Include="App\custom-loader\http-service.factory.ts" />
+    <TypeScriptCompile Include="App\custom-loader\loader.service.ts" />
+    <TypeScriptCompile Include="App\custom-loader\loader\loader.ts" />
+    <TypeScriptCompile Include="App\custom-loader\custom-http.service.ts" />
     <TypeScriptCompile Include="App\models\dto\base\base-request.ts" />
     <TypeScriptCompile Include="App\models\dto\base\base-auth-response.ts" />
     <TypeScriptCompile Include="App\models\dto\base\base-response.ts" />
@@ -220,6 +226,8 @@
     <Content Include="App\app.html" />
     <Content Include="App\autorization\autorization.css" />
     <Content Include="App\autorization\autorization.html" />
+    <Content Include="App\custom-loader\loader\loader.css" />
+    <Content Include="App\custom-loader\loader\loader.html" />
     <Content Include="App\registration\registration.css" />
     <Content Include="App\registration\registration.html" />
     <Content Include="App\start\start.css" />

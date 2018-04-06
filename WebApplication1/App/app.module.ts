@@ -2,8 +2,8 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { MatCardModule, MatInputModule, MatCheckboxModule, MatStepperModule } from '@angular/material';
+import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
+import { MatCardModule, MatInputModule, MatCheckboxModule, MatStepperModule, MatProgressBarModule } from '@angular/material';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,8 +16,12 @@ import { UserService } from './services/user.service';
 
 import { App } from './app';
 import { Start } from './start/start';
-import { Autorization } from './autorization/autorization'; 
+import { Autorization } from './autorization/autorization';
 import { Registration } from './registration/registration';
+import { LoaderService } from './custom-loader/loader.service';
+import { httpServiceFactory } from './custom-loader/http-service.factory';
+import { CustomHttpService } from './custom-loader/custom-http.service';
+import { CoreModule } from './custom-loader/core.module';
 
 const appRoutes: Routes = [
     { path: 'autorization', component: Autorization },
@@ -46,13 +50,26 @@ const appRoutes: Routes = [
         MatCheckboxModule,
         MatStepperModule,
         MatIconModule,
+        MatProgressBarModule,
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         ReactiveFormsModule,
+        CoreModule,
         RouterModule.forRoot(appRoutes, { useHash: true })],
     declarations: [App, Start, Autorization, Registration],
-    providers: [TransportService, AuthService, AuthGuard, PathsService, UserService, MatIconRegistry],
+    providers: [TransportService,
+        AuthService,
+        AuthGuard,
+        PathsService,
+        UserService,
+        MatIconRegistry,
+        LoaderService,
+        {
+            provide: CustomHttpService,
+            useFactory: httpServiceFactory,
+            deps: [XHRBackend, RequestOptions, LoaderService]
+        }],
     bootstrap: [App]
 })
 
