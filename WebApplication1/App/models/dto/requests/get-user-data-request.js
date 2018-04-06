@@ -10,13 +10,13 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_request_1 = require("../base/base-request");
+var base_auth_request_1 = require("../base/base-auth-request");
 var GetUserDataRequest = /** @class */ (function (_super) {
     __extends(GetUserDataRequest, _super);
     function GetUserDataRequest() {
         return _super.call(this, localStorage.getItem('token')) || this;
     }
     return GetUserDataRequest;
-}(base_request_1.BaseRequest));
+}(base_auth_request_1.BaseAuthRequest));
 exports.GetUserDataRequest = GetUserDataRequest;
 //# sourceMappingURL=get-user-data-request.js.map

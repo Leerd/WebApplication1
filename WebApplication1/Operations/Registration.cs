@@ -13,7 +13,14 @@ namespace WebApplication1.Operations
             var user = dbHealper.TestRegistrationUserBusy(request);
 
             if (user == null)
-                return dbHealper.UserRegistration(request);
+            {
+                var verificatioCode = dbHealper.UserRegistration(request);
+                var data = $"to={request.Phone}&text={verificatioCode}";
+
+                new SMSHelper().SendVerificationSMS(data);
+
+                return new RegistrationResponse(true);
+            }
 
             var response = new RegistrationResponse();
 

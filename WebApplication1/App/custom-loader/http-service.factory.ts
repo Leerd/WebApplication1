@@ -1,9 +1,8 @@
-﻿import { XHRBackend } from '@angular/http';
+﻿import { XHRBackend, BaseRequestOptions } from '@angular/http';
 import { LoaderService } from './loader.service';
 import { CustomHttpService } from './custom-http.service';
-import { AngularReduxRequestOptions } from './angular-redux-request.options';
 
-function httpServiceFactory(backend: XHRBackend, options: AngularReduxRequestOptions, loaderService: LoaderService) {
+function httpServiceFactory(backend: XHRBackend, options: BaseRequestOptions, loaderService: LoaderService) {
     return new CustomHttpService(backend, options, loaderService);
 }
 

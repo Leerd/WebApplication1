@@ -14,6 +14,11 @@
     min-width: 150px;
     max-width: 400px;
     width: 100%;
+    margin-bottom: 10px;
+}
+
+.example-card, .registration-card {
+    margin-left: -45px;
 }
 
 .example-full-width {
@@ -22,6 +27,22 @@
 
 .btn-width {
     width: 115px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.f-size {
+    font-size: 17px;
+}
+
+.input-center {
+    text-align: center !important;
 }
 
 .registration-card {
@@ -45,25 +66,57 @@
     cursor: pointer;
 }
 
+.error {
+    text-align: center;
+    margin-top: -15px;
+    color: red;
+    font-size: 13px;
+}
+
 .page-name {
     text-align: center;
     margin-bottom: 50px;
+    margin-top: 0px;
+    margin-left: -45px;
 }
 
 .ng-pristine label {
     color: rgba(0,0,0,.54) !important;
 }
 
-.mat-horizontal-stepper-header {
+/*.mat-horizontal-stepper-header {
     pointer-events: none !important;
-}
+}*/
 
-    .mat-step-icon, .mat-horizontal-stepper-header .mat-step-icon-not-touched {
-        height: 36px !important;
-        width: 36px !important;
-    }
+.mat-step-icon, .mat-horizontal-stepper-header .mat-step-icon-not-touched {
+    height: 36px !important;
+    width: 36px !important;
+}
 
 .mat-step-label {
     font-size: 17px;
     font-weight: 500;
+}
+
+.confirmAccount {
+    margin-bottom: 25px;
+    width: 330px;
+    margin: 10px auto;
+}
+
+.mat-horizontal-content-container {
+    padding: 0 !important;
+}
+
+.mat-vertical-content {
+    height: 69vh !important;
+}
+
+.table-position {
+    width: 98%;
+    margin: 0 auto;
+}
+
+.mat-column-check {
+    text-align: right;
 }

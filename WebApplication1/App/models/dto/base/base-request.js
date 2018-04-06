@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var BaseRequest = /** @class */ (function () {
-    function BaseRequest(token) {
-        this.token = token;
+    function BaseRequest() {
     }
     return BaseRequest;
 }());

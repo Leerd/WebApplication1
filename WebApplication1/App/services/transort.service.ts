@@ -10,9 +10,9 @@ import { CustomHttpService } from '../custom-loader/custom-http.service';
 @Injectable()
 
 export class TransportService {
-    constructor(private http: Http, private pathsService: PathsService, private customHttpService: CustomHttpService) { }
+    constructor(private pathsService: PathsService, private customHttpService: CustomHttpService) { }
 
-    public postData(url: string, request): Promise<any> {
+    public postData(url: string, request?): Promise<any> {
         const self = this;
 
         let headers = new Headers();
@@ -31,7 +31,7 @@ export class TransportService {
     public getData(url): Promise<any> {
         const self = this;
 
-        return self.http.get(url).map(res => res.json())
+        return self.customHttpService.get(url).map(res => res.json())
             .toPromise();
     }
 

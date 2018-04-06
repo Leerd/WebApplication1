@@ -8,59 +8,44 @@ import {
     Response,
     Request,
     Headers,
-    XHRBackend
+    XHRBackend,
+    BaseRequestOptions
 } from '@angular/http';
 
-import { AngularReduxRequestOptions } from './angular-redux-request.options';
 import { LoaderService } from './loader.service';
 
 @Injectable()
 export class CustomHttpService extends Http {
 
-    constructor(
-        backend: XHRBackend,
-        defaultOptions: AngularReduxRequestOptions,
-        private loaderService: LoaderService
-    ) {
+    constructor(backend: XHRBackend, defaultOptions: BaseRequestOptions, private loaderService: LoaderService) {
         super(backend, defaultOptions);
     }
 
     get(url: string, options?: RequestOptionsArgs): Observable<any> {
+        const self = this;
+        self.showLoader();
 
-        this.showLoader();
-
-        return super.get(url, this.requestOptions(options))
-            .catch(this.onCatch)
-            .do((res: Response) => {
-                this.onSuccess(res);
-            }, (error: any) => {
-                this.onError(error);
-            })
+        return super.get(url, self.requestOptions(options))
             .finally(() => {
-                this.onEnd();
+                self.hideLoader();
             });
 
     }
 
-    post(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
-        this.showLoader();
+    post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
+        const self = this;
+        self.showLoader();
 
-        return super.post(url, body, this.requestOptions(options))
-            .catch(this.onCatch)
-            .do((res: Response) => {
-                this.onSuccess(res);
-            }, (error: any) => {
-                this.onError(error);
-            })
+        return super.post(url, body, self.requestOptions(options))
             .finally(() => {
-                this.onEnd();
+                self.hideLoader();
             });
     }
 
     private requestOptions(options?: RequestOptionsArgs): RequestOptionsArgs {
 
         if (options == null) {
-            options = new AngularReduxRequestOptions();
+            options = new BaseRequestOptions();
         }
 
         if (options.headers == null) {
@@ -70,27 +55,13 @@ export class CustomHttpService extends Http {
         return options;
     }
 
-    private onCatch(error: any, caught: Observable<any>): Observable<any> {
-        return Observable.throw(error);
-    }
-
-    private onSuccess(res: Response): void {
-        console.log('Request successful');
-    }
-
-    private onError(res: Response): void {
-        console.log('Error, status code: ' + res.status);
-    }
-
-    private onEnd(): void {
-        this.hideLoader();
-    }
-
     private showLoader(): void {
-        this.loaderService.show();
+        const self = this;
+        self.loaderService.show();
     }
 
     private hideLoader(): void {
-        this.loaderService.hide();
+        const self = this;
+        self.loaderService.hide();
     }
 }

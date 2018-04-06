@@ -18,5 +18,11 @@ namespace WebApplication1.Controllers
         {
             return new Registration().Execute(request);
         }
+
+        [HttpPost]
+        public ConfirmAccountResponse ConfirmAccount(ConfirmAccountRequest request)
+        {
+            return new ConfirmAccount().Execute(request.Code);
+        }
     }
 }

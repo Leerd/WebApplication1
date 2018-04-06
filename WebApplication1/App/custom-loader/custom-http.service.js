@@ -20,10 +20,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var Observable_1 = require("rxjs/Observable");
 require("rxjs/Rx");
 var http_1 = require("@angular/http");
-var angular_redux_request_options_1 = require("./angular-redux-request.options");
 var loader_service_1 = require("./loader.service");
 var CustomHttpService = /** @class */ (function (_super) {
     __extends(CustomHttpService, _super);
@@ -33,65 +31,41 @@ var CustomHttpService = /** @class */ (function (_super) {
         return _this;
     }
     CustomHttpService.prototype.get = function (url, options) {
-        var _this = this;
-        this.showLoader();
-        return _super.prototype.get.call(this, url, this.requestOptions(options))
-            .catch(this.onCatch)
-            .do(function (res) {
-            _this.onSuccess(res);
-        }, function (error) {
-            _this.onError(error);
-        })
+        var self = this;
+        self.showLoader();
+        return _super.prototype.get.call(this, url, self.requestOptions(options))
             .finally(function () {
-            _this.onEnd();
+            self.hideLoader();
         });
     };
     CustomHttpService.prototype.post = function (url, body, options) {
-        var _this = this;
-        this.showLoader();
-        return _super.prototype.post.call(this, url, body, this.requestOptions(options))
-            .catch(this.onCatch)
-            .do(function (res) {
-            _this.onSuccess(res);
-        }, function (error) {
-            _this.onError(error);
-        })
+        var self = this;
+        self.showLoader();
+        return _super.prototype.post.call(this, url, body, self.requestOptions(options))
             .finally(function () {
-            _this.onEnd();
+            self.hideLoader();
         });
     };
     CustomHttpService.prototype.requestOptions = function (options) {
         if (options == null) {
-            options = new angular_redux_request_options_1.AngularReduxRequestOptions();
+            options = new http_1.BaseRequestOptions();
         }
         if (options.headers == null) {
             options.headers = new http_1.Headers();
         }
         return options;
     };
-    CustomHttpService.prototype.onCatch = function (error, caught) {
-        return Observable_1.Observable.throw(error);
-    };
-    CustomHttpService.prototype.onSuccess = function (res) {
-        console.log('Request successful');
-    };
-    CustomHttpService.prototype.onError = function (res) {
-        console.log('Error, status code: ' + res.status);
-    };
-    CustomHttpService.prototype.onEnd = function () {
-        this.hideLoader();
-    };
     CustomHttpService.prototype.showLoader = function () {
-        this.loaderService.show();
+        var self = this;
+        self.loaderService.show();
     };
     CustomHttpService.prototype.hideLoader = function () {
-        this.loaderService.hide();
+        var self = this;
+        self.loaderService.hide();
     };
     CustomHttpService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.XHRBackend,
-            angular_redux_request_options_1.AngularReduxRequestOptions,
-            loader_service_1.LoaderService])
+        __metadata("design:paramtypes", [http_1.XHRBackend, http_1.BaseRequestOptions, loader_service_1.LoaderService])
     ], CustomHttpService);
     return CustomHttpService;
 }(http_1.Http));

@@ -14,7 +14,7 @@
 .diasbled {
     position: absolute;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.4);
-    height: 99%;
+    background-color: rgba(0,0,0,.08);
+    height: 99vh;
     z-index: 9999;
 }

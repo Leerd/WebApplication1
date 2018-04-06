@@ -7,7 +7,7 @@ export class LoaderService {
 
     private loaderSubject = new Subject<LoaderState>();
 
-    loaderState = this.loaderSubject.asObservable();
+    public loaderState = this.loaderSubject.asObservable();
 
     constructor() { }
 

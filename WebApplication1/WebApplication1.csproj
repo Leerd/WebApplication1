@@ -171,24 +171,31 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\app.ts" />
     <TypeScriptCompile Include="App\autorization\autorization.ts" />
-    <TypeScriptCompile Include="App\custom-loader\angular-redux-request.options.ts" />
     <TypeScriptCompile Include="App\custom-loader\core.module.ts" />
     <TypeScriptCompile Include="App\custom-loader\http-service.factory.ts" />
     <TypeScriptCompile Include="App\custom-loader\loader.service.ts" />
     <TypeScriptCompile Include="App\custom-loader\loader\loader.ts" />
     <TypeScriptCompile Include="App\custom-loader\custom-http.service.ts" />
+    <TypeScriptCompile Include="App\models\dto\base\base-auth-request.ts" />
     <TypeScriptCompile Include="App\models\dto\base\base-request.ts" />
     <TypeScriptCompile Include="App\models\dto\base\base-auth-response.ts" />
     <TypeScriptCompile Include="App\models\dto\base\base-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\game.ts" />
+    <TypeScriptCompile Include="App\models\dto\requests\confirm-account-request.ts" />
     <TypeScriptCompile Include="App\models\dto\requests\get-user-data-request.ts" />
     <TypeScriptCompile Include="App\models\dto\requests\registration-request.ts" />
     <TypeScriptCompile Include="App\models\dto\responses\auth-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\responses\confirm-account-response.ts" />
+    <TypeScriptCompile Include="App\models\dto\responses\get-all-games-response.ts" />
     <TypeScriptCompile Include="App\models\dto\responses\get-user-data-response.ts" />
     <TypeScriptCompile Include="App\models\dto\responses\registration-response.ts" />
     <TypeScriptCompile Include="App\models\interface\auth.ts" />
     <TypeScriptCompile Include="App\models\dto\requests\auth-request.ts" />
+    <TypeScriptCompile Include="App\models\interface\confirm-account-errors.ts" />
     <TypeScriptCompile Include="App\models\interface\enum\html-element-type-enum.ts" />
     <TypeScriptCompile Include="App\models\interface\registration-data.ts" />
+    <TypeScriptCompile Include="App\models\interface\registration-eroors.ts" />
+    <TypeScriptCompile Include="App\pips\pips.ts" />
     <TypeScriptCompile Include="App\registration\registration.ts" />
     <TypeScriptCompile Include="App\services\auth-guard.service.ts" />
     <TypeScriptCompile Include="App\services\auth.services.ts" />
@@ -199,6 +206,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,18 +214,27 @@
     </Compile>
     <Compile Include="Healpers\DBHelper.cs" />
     <Compile Include="Healpers\GenerateHelper.cs" />
+    <Compile Include="Healpers\SMSHelper.cs" />
     <Compile Include="Healpers\TokenHelper.cs" />
     <Compile Include="Models\Base\BaseRequest.cs" />
     <Compile Include="Models\Base\BaseAuthResponse.cs" />
     <Compile Include="Models\Base\BaseResponse.cs" />
+    <Compile Include="Models\DataBase\Game.cs" />
     <Compile Include="Models\DataBase\User.cs" />
     <Compile Include="Models\DataBase\Verification.cs" />
     <Compile Include="Models\Requests\AuthRequest.cs" />
+    <Compile Include="Models\Requests\ConfirmAccountRequest.cs" />
     <Compile Include="Models\Requests\GetUserDataRequest.cs" />
     <Compile Include="Models\Requests\RegistrationRequest.cs" />
     <Compile Include="Models\Responses\AuthResponse.cs" />
+    <Compile Include="Models\Responses\ConfirmAccountResponse.cs" />
+    <Compile Include="Models\Responses\GetAllGamesResponse.cs" />
     <Compile Include="Models\Responses\RegistrationResponse.cs" />
     <Compile Include="Models\UserData.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\VerificationModel.cs" />
+    <Compile Include="Operations\ConfirmAccount.cs" />
+    <Compile Include="Operations\GetAllGames.cs" />
     <Compile Include="Operations\LoginIn.cs" />
     <Compile Include="Operations\Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -291,6 +308,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\app.module.ts" />
     <TypeScriptCompile Include="App\main.ts" />
+    <TypeScriptCompile Include="App\services\data-storage.service.ts" />
+    <TypeScriptCompile Include="App\services\games.service.ts" />
     <TypeScriptCompile Include="App\services\paths.service.ts" />
     <TypeScriptCompile Include="App\services\transort.service.ts" />
     <TypeScriptCompile Include="App\services\user.service.ts" />

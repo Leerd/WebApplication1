@@ -23,6 +23,10 @@ var AuthService = /** @class */ (function () {
         var self = this;
         return self.transportServise.postData('api/Auth/Registration', request);
     };
+    AuthService.prototype.confirmAccount = function (request) {
+        var self = this;
+        return self.transportServise.postData('api/Auth/ConfirmAccount', request);
+    };
     AuthService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [transort_service_1.TransportService])

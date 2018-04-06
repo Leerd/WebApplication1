@@ -4,7 +4,6 @@
     {
         public bool IsSuccess { get; set; }
 
-
         public BaseResponse() { }
 
         public BaseResponse(bool isSuccess)

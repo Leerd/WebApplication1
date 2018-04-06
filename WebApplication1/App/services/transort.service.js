@@ -16,8 +16,7 @@ require("rxjs/add/operator/toPromise");
 require("rxjs/add/operator/map");
 var custom_http_service_1 = require("../custom-loader/custom-http.service");
 var TransportService = /** @class */ (function () {
-    function TransportService(http, pathsService, customHttpService) {
-        this.http = http;
+    function TransportService(pathsService, customHttpService) {
         this.pathsService = pathsService;
         this.customHttpService = customHttpService;
     }
@@ -34,7 +33,7 @@ var TransportService = /** @class */ (function () {
     };
     TransportService.prototype.getData = function (url) {
         var self = this;
-        return self.http.get(url).map(function (res) { return res.json(); })
+        return self.customHttpService.get(url).map(function (res) { return res.json(); })
             .toPromise();
     };
     TransportService.prototype.errorHandler = function (error) {
@@ -46,7 +45,7 @@ var TransportService = /** @class */ (function () {
     };
     TransportService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http, paths_service_1.PathsService, custom_http_service_1.CustomHttpService])
+        __metadata("design:paramtypes", [paths_service_1.PathsService, custom_http_service_1.CustomHttpService])
     ], TransportService);
     return TransportService;
 }());

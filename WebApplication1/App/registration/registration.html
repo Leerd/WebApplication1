@@ -1,4 +1,4 @@
-﻿<mat-horizontal-stepper linear #stepper="matHorizontalStepper">
+﻿<mat-horizontal-stepper linear="false" #stepper="matHorizontalStepper">
     <ng-template matStepperIcon="edit">
         <mat-icon>check</mat-icon>
     </ng-template>
@@ -13,15 +13,19 @@
                         <input matInput placeholder="Логин" [(ngModel)]="registrationData.login" name="login" formControlName="login">
                     </mat-form-field>
 
-                    <div *ngIf="registretionForm.controls['login'].touched && registretionForm.controls['login'].value == '' ">
+                    <div class="error" *ngIf="registretionForm.controls['login'].touched && registretionForm.controls['login'].value == '' ">
                         Введите логин
+                    </div>
+
+                    <div class="error" *ngIf="registrationErrors.isLoginBusy">
+                        Введенный вами Логин занят
                     </div>
 
                     <mat-form-field class="example-full-width marg-top">
                         <input matInput placeholder="Имя" [(ngModel)]="registrationData.name" name="name" formControlName="name">
                     </mat-form-field>
 
-                    <div *ngIf="registretionForm.controls['name'].touched && registretionForm.controls['name'].value == '' ">
+                    <div class="error" *ngIf="registretionForm.controls['name'].touched && registretionForm.controls['name'].value == '' ">
                         Введите ваше имя
                     </div>
 
@@ -29,7 +33,7 @@
                         <input matInput placeholder="Фамилия" [(ngModel)]="registrationData.surName" name="surName" formControlName="surName">
                     </mat-form-field>
 
-                    <div *ngIf="registretionForm.controls['surName'].touched && registretionForm.controls['surName'].value == '' ">
+                    <div class="error" *ngIf="registretionForm.controls['surName'].touched && registretionForm.controls['surName'].value == '' ">
                         Введите вашу фамилию
                     </div>
 
@@ -37,12 +41,16 @@
                         <input matInput placeholder="E-mail" [(ngModel)]="registrationData.email" name="email" #email formControlName="email">
                     </mat-form-field>
 
-                    <div *ngIf="registretionForm.controls['email'].value == '' ">
+                    <div class="error" *ngIf="registretionForm.controls['email'].value == '' ">
                         Введите E-mail
                     </div>
 
-                    <div *ngIf="registretionForm.controls['email'].invalid && registretionForm.controls['email'].touched && registretionForm.controls['email'].value != ''">
+                    <div class="error" *ngIf="registretionForm.controls['email'].invalid && registretionForm.controls['email'].touched && registretionForm.controls['email'].value != ''">
                         E-mail введен не верно
+                    </div>
+
+                    <div class="error" *ngIf="registrationErrors.isEmailBusy">
+                        Введенный вами Email занят
                     </div>
 
                     <mat-form-field class="example-full-width marg-top vizible-password">
@@ -55,7 +63,7 @@
                         <input matInput class="password-inp" type="password" placeholder="Подтвердите пароль" [(ngModel)]="passwordConfirm" name="C" formControlName="passwordConfirm" #passpordConfirm>
                     </mat-form-field>
 
-                    <div *ngIf="registretionForm.controls['passwordConfirm'].invalid && registretionForm.controls['passwordConfirm'].dirty && registretionForm.controls['passwordConfirm'].value != '' && registretionForm.controls['passwordFirst'].touched">
+                    <div class="error" *ngIf="registretionForm.controls['passwordConfirm'].invalid && registretionForm.controls['passwordConfirm'].dirty && registretionForm.controls['passwordConfirm'].value != '' && registretionForm.controls['passwordFirst'].touched">
                         Пароли не совпадают
                     </div>
 
@@ -64,8 +72,12 @@
                     </mat-form-field>
                 </mat-card-content>
 
-                <div *ngIf="registretionForm.controls['phone'].touched && registretionForm.controls['phone'].value == '' ">
+                <div class="error" *ngIf="registretionForm.controls['phone'].touched && registretionForm.controls['phone'].value == '' ">
                     Введите телефон
+                </div>
+
+                <div class="error" *ngIf="registrationErrors.isPhoneBusy">
+                    Введенный вами Телефон занят
                 </div>
 
                 <mat-card-actions>
@@ -79,18 +91,33 @@
     </mat-step> <!--Step-1 End-->
     <mat-step>
         <!--Step-2-->
-        <form>
+        <form class="example-form midlle form-marg-top">
             <ng-template matStepLabel>Подтверждение</ng-template>
+            <h2 class="page-name">Подтверждение Аккаунта</h2>
             <mat-card class="example-card">
+                <mat-card-header>
+                    <div class="w100 text-center">
+                        <p class="f-size">Время действия кода: {{timer | async | formatTime}}</p>
+                    </div>
+                </mat-card-header>
                 <mat-card-content>
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Код подтверждения">
+                    <mat-form-field class="example-full-width input-center">
+                        <input matInput placeholder="Код подтверждения" [(ngModel)]="codeConfirm" name="codeConfirm">
                     </mat-form-field>
+
+                    <div class="error" *ngIf="confirmAccountErrors.isTimeEnd">
+                        Время действия кода истекло
+                    </div>
+
+                    <div class="error" *ngIf="confirmAccountErrors.isErrorCode">
+                        Введенный код неверен
+                    </div>
                 </mat-card-content>
 
                 <mat-card-actions>
                     <div class="btn-middle">
-                        <button class="btn btn-default btn-width">Подтвердить</button>
+                        <button class="btn btn-default btn-width" (click)="confirmAccount()">Подтвердить</button>
+                        <button class="btn btn-default btn-width" (click)="newCode()" [disabled]="dataStorageService.maxTimerValue != 0">Новый код</button>
                     </div>
                 </mat-card-actions>
             </mat-card>
@@ -99,10 +126,43 @@
     <mat-step>
         <!--Step-3-->
         <ng-template matStepLabel>Завершение регистрации</ng-template>
-        You are now done.
-        <div>
-            <button mat-button>Back</button>
-            <button mat-button>Reset</button>
+        <h2 class="page-name">Выбирете Игры</h2>
+
+        <div class="table-position mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource">
+
+                <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="check">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-checkbox></mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
         </div>
+
     </mat-step><!--Step-3 End-->
 </mat-horizontal-stepper>

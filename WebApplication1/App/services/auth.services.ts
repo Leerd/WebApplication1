@@ -8,6 +8,9 @@ import { AuthResponse } from '../models/dto/responses/auth-response';
 import { RegistrationRequest } from '../models/dto/requests/registration-request';
 import { RegistrationResponse } from '../models/dto/responses/registration-response';
 
+import { ConfirmAccountRequest } from '../models/dto/requests/confirm-account-request';
+import { ConfirmAccountResponse } from '../models/dto/responses/confirm-account-response';
+
 @Injectable()
 
 export class AuthService {
@@ -23,6 +26,11 @@ export class AuthService {
     public regitration(request: RegistrationRequest): Promise<RegistrationResponse> {
         const self = this;
         return self.transportServise.postData('api/Auth/Registration', request)
+    }
+
+    public confirmAccount(request: ConfirmAccountRequest): Promise<ConfirmAccountResponse> {
+        const self = this;
+        return self.transportServise.postData('api/Auth/ConfirmAccount', request)
     }
 
 }
